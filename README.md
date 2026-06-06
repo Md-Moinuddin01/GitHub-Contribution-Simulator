@@ -1,1 +1,94 @@
-# GitHub-Contribution-Simulator
+# GitHub Contribution Simulator
+
+Practice Open Source Before Contributing to Real Repositories.
+
+This is a full-stack Next.js 14 App Router application for learning the open-source contribution workflow in a safe sandbox. It includes fake repositories, issues, Monaco-based editing, Git command simulation, pull requests, AI maintainer review, XP, badges, heatmaps, leaderboards, admin analytics, Prisma models, and seed data.
+
+<img width="1897" height="979" alt="git semulator" src="https://github.com/user-attachments/assets/421b7450-6c5f-4564-a2e6-e0c72a605fa4" />
+## Stack
+
+- Next.js 14 App Router, TypeScript, Tailwind CSS
+- shadcn-style UI primitives with Radix
+- Prisma ORM with PostgreSQL
+- NextAuth credentials auth with Prisma adapter
+- Monaco Editor
+- Zustand local simulator state
+- Supabase Realtime-ready helper, with local event fallback
+- OpenAI or Gemini AI review integration, with deterministic fallback
+
+## Local Setup
+
+```bash
+npm install
+cp .env.example .env
+npm run db:generate
+npm run dev
+```
+
+Open http://localhost:3000.
+
+Demo login:
+
+- Email: `maya@example.com`
+- Password: `password`
+
+The UI runs with local simulator data immediately. For real database persistence, run PostgreSQL and set `DATABASE_URL`, then:
+
+```bash
+npm run db:migrate
+npm run db:seed
+```
+
+## Environment Variables
+
+See `.env.example`.
+
+- `DATABASE_URL`: PostgreSQL connection string
+- `NEXTAUTH_URL`: local or deployed URL
+- `NEXTAUTH_SECRET`: long random secret
+- `OPENAI_API_KEY` or `GEMINI_API_KEY`: optional AI maintainer review
+- `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`: optional realtime channel support
+
+## Key Routes
+
+- `/` landing page
+- `/auth/signup` and `/auth/login`
+- `/dashboard`
+- `/repositories`
+- `/repositories/[slug]`
+- `/issues`
+- `/editor/[issueId]`
+- `/pull-requests`
+- `/pull-requests/[id]`
+- `/leaderboard`
+- `/admin`
+
+## Deployment Guide for Vercel
+
+1. Push this folder to GitHub.
+2. Create a PostgreSQL database such as Neon, Supabase, or Vercel Postgres.
+3. Add the environment variables in Vercel Project Settings.
+4. Set `NEXTAUTH_URL` to your deployed domain.
+5. Run the Prisma migration from your machine or CI:
+
+```bash
+npm run db:migrate
+npm run db:seed
+```
+
+6. Deploy with Vercel. The app uses deterministic AI review if no provider key is configured.
+
+## Seed Data
+
+The seed includes:
+
+- 8 fake repositories
+- 40 issues
+- 10 badges
+- 5 demo users
+- 10 demo pull requests
+- Example files and branches for each repository
+
+## Notes
+
+Protected routes accept either a NextAuth JWT session or the local simulator cookie set by the demo auth form. This keeps the app usable before PostgreSQL is connected while preserving the production database/auth path.
