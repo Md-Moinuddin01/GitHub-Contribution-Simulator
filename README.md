@@ -63,6 +63,22 @@ See `.env.example`.
 - `/leaderboard`
 - `/admin`
 
+## Main Pages
+
+- `/` - Landing page with product overview, features, testimonials, pricing, FAQ, and action hub.
+- `/auth/login` - Login form with demo access.
+- `/auth/signup` - Demo signup flow.
+- `/dashboard` - XP, level, solved issues, merged PRs, badges, heatmap, activity, and quick actions.
+- `/repositories` - Practice repository catalog.
+- `/repositories/[slug]` - Repository tabs for code, issues, pull requests, README, and contributors.
+- `/issues` - Issue marketplace with filtering and assignment.
+- `/editor/[issueId]` - Monaco editor, file tree, language selector, terminal, tests, commits, and PR creation.
+- `/pull-requests` - Simulated PR list.
+- `/pull-requests/[id]` - Conversation, commits, files changed, checks, review, and merge.
+- `/merge-conflicts` - Manual merge conflict practice.
+- `/leaderboard` - XP and contributor ranking.
+- `/admin` - Admin dashboard for content and analytics.
+- 
 ## Deployment Guide for Vercel
 
 1. Push this folder to GitHub.
@@ -92,3 +108,4 @@ The seed includes:
 ## Notes
 
 Protected routes accept either a NextAuth JWT session or the local simulator cookie set by the demo auth form. This keeps the app usable before PostgreSQL is connected while preserving the production database/auth path.
+
