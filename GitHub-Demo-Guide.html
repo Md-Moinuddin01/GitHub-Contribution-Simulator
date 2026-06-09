@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GitHub Contribution Simulator Guide</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #09090b;
+        --panel: #111827;
+        --panel-2: #18181b;
+        --border: #27272a;
+        --text: #f4f4f5;
+        --muted: #a1a1aa;
+        --green: #34d399;
+        --blue: #60a5fa;
+        --purple: #c084fc;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 15% 10%, rgba(52, 211, 153, 0.18), transparent 26rem),
+          radial-gradient(circle at 85% 15%, rgba(96, 165, 250, 0.14), transparent 24rem),
+          radial-gradient(circle at 50% 75%, rgba(192, 132, 252, 0.12), transparent 22rem),
+          var(--bg);
+        color: var(--text);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      a {
+        color: var(--green);
+      }
+
+      code {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: #0f172a;
+        padding: 0.1rem 0.35rem;
+        color: #d9f99d;
+      }
+
+      pre {
+        overflow-x: auto;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #020617;
+        padding: 1rem;
+      }
+
+      pre code {
+        border: 0;
+        background: transparent;
+        padding: 0;
+      }
+
+      .shell {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .hero {
+        padding: 72px 0 36px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        border: 1px solid rgba(52, 211, 153, 0.35);
+        border-radius: 999px;
+        background: rgba(52, 211, 153, 0.1);
+        padding: 0.35rem 0.75rem;
+        color: var(--green);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.15;
+      }
+
+      h1 {
+        max-width: 880px;
+        margin: 1rem 0;
+        font-size: clamp(2.4rem, 8vw, 5rem);
+        letter-spacing: -0.03em;
+      }
+
+      h2 {
+        margin: 0 0 1rem;
+        font-size: clamp(1.5rem, 4vw, 2.25rem);
+      }
+
+      h3 {
+        margin: 0 0 0.5rem;
+      }
+
+      .lead {
+        max-width: 760px;
+        color: #d4d4d8;
+        font-size: 1.12rem;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        background: var(--green);
+        color: #052e16;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .button.secondary {
+        border: 1px solid var(--border);
+        background: rgba(24, 24, 27, 0.85);
+        color: var(--text);
+      }
+
+      .grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: rgba(17, 24, 39, 0.74);
+        padding: 1.2rem;
+      }
+
+      .card strong {
+        color: white;
+      }
+
+      section {
+        padding: 32px 0;
+      }
+
+      ul,
+      ol {
+        padding-left: 1.3rem;
+      }
+
+      li + li {
+        margin-top: 0.45rem;
+      }
+
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pill-list li {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(24, 24, 27, 0.85);
+        padding: 0.35rem 0.7rem;
+        color: #d4d4d8;
+        font-size: 0.9rem;
+      }
+
+      .note {
+        border-left: 4px solid var(--blue);
+        background: rgba(96, 165, 250, 0.1);
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        margin-top: 32px;
+        padding: 28px 0;
+        color: var(--muted);
+      }
+
+      @media (max-width: 820px) {
+        .grid.three,
+        .grid.two {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding-top: 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <span class="eyebrow">Project handoff guide</span>
+        <h1>GitHub Contribution Simulator</h1>
+        <p class="lead">
+          A full-stack practice environment where beginners learn the open-source contribution workflow before contributing to real GitHub repositories.
+        </p>
+        <div class="actions">
+          <a class="button" href="http://127.0.0.1:3000/auth/demo">Open demo workspace</a>
+          <a class="button secondary" href="http://127.0.0.1:3000">Open landing page</a>
+        </div>
+      </section>
+
+      <section>
+        <h2>How To Use</h2>
+        <div class="grid two">
+          <div class="card">
+            <h3>Run Locally</h3>
+            <pre><code>npm install
+npm run db:generate
+npm run dev</code></pre>
+            <p>Then open <code>http://127.0.0.1:3000/auth/demo</code> for instant demo access.</p>
+          </div>
+          <div class="card">
+            <h3>Demo Login</h3>
+            <p>Use the shortcut route, or log in manually:</p>
+            <ul>
+              <li>Email: <code>maya@example.com</code></li>
+              <li>Password: <code>password</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>What The App Includes</h2>
+        <div class="grid three">
+          <div class="card"><strong>Repository practice</strong><br />Fake open-source repositories with issues, README tabs, file structures, and real GitHub reference links.</div>
+          <div class="card"><strong>Issue marketplace</strong><br />Browse, filter, assign, and work on beginner to advanced practice issues.</div>
+          <div class="card"><strong>Browser code editor</strong><br />Monaco editor with file tree, syntax highlighting, save/reset, fake tests, and terminal commands.</div>
+          <div class="card"><strong>Git workflow</strong><br />Practice fork, branch, edit, stage, commit, push, and pull request steps.</div>
+          <div class="card"><strong>AI maintainer review</strong><br />Get review-style feedback using OpenAI/Gemini when configured, or a local fallback reviewer.</div>
+          <div class="card"><strong>Gamification</strong><br />XP, levels, badges, contribution heatmap, streak-style activity, and leaderboard screens.</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Why This Is Different</h2>
+        <div class="card">
+          <p>
+            Normal GitHub tutorials teach commands one by one. This simulator teaches the whole contribution experience in a safe place: choosing an issue, editing code, committing, opening a PR, receiving review, fixing changes, resolving conflicts, and merging.
+          </p>
+          <ul>
+            <li>Beginners can make mistakes without affecting a real project.</li>
+            <li>The UI feels familiar to GitHub users but stays beginner-friendly.</li>
+            <li>AI review gives realistic maintainer feedback before real public review.</li>
+            <li>The editor, issue tracker, PR simulator, terminal, and dashboard live in one app.</li>
+            <li>Teachers and communities can use the admin area as a training console.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Main Pages</h2>
+        <ul class="pill-list">
+          <li>/</li>
+          <li>/auth/demo</li>
+          <li>/auth/login</li>
+          <li>/auth/signup</li>
+          <li>/dashboard</li>
+          <li>/repositories</li>
+          <li>/issues</li>
+          <li>/editor/issue-01</li>
+          <li>/pull-requests</li>
+          <li>/merge-conflicts</li>
+          <li>/leaderboard</li>
+          <li>/admin</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Editor Languages</h2>
+        <ul class="pill-list">
+          <li>TypeScript</li>
+          <li>TSX</li>
+          <li>JavaScript</li>
+          <li>JSX</li>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JSON</li>
+          <li>Markdown</li>
+          <li>Prisma</li>
+          <li>Python</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Database And AI Notes</h2>
+        <div class="card note">
+          <p>
+            The app works immediately in demo mode with <code>ENABLE_DATABASE=false</code>. To use PostgreSQL, set <code>ENABLE_DATABASE=true</code>, configure <code>DATABASE_URL</code>, then run migrations and seed data.
+          </p>
+          <pre><code>npm run db:migrate
+npm run db:seed</code></pre>
+          <p>
+            AI review works with <code>OPENAI_API_KEY</code> or <code>GEMINI_API_KEY</code>. If no key is configured, the simulator uses a local maintainer-review fallback.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell">
+        Built as a safe open-source practice simulator. Read <code>README.md</code> for the complete setup and deployment guide.
+      </div>
+    </footer>
+  </body>
+</html>
