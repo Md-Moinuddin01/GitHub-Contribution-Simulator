@@ -24,7 +24,12 @@ cp .env.example .env
 npm run db:generate
 npm run dev
 ```
+Use this public URL to open the app from any device anywhere:
 
+https://fluffy-trains-pick.loca.lt
+
+I verified that this tunnel currently responds with HTTP 200 OK.
+The local app is also available on your machine at http://localhost:3000.
 Open http://localhost:3000.
 
 Demo login:
